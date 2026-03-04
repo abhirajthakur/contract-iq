@@ -1,12 +1,33 @@
 {
   "name": "@contract-iq/api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch src/index.ts",
+    "build": "rm -rf dist && tsc",
+    "start": "node dist/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "imports": {
+    "#api/*": "./dist/*"
+  },
+  "devDependencies": {
+    "@contract-iq/typescript-config": "workspace:^",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^20",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@contract-iq/types": "workspace:^",
+    "@google/genai": "^1.43.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "mammoth": "^1.11.0",
+    "multer": "^2.1.0",
+    "pdf-parse": "^2.4.5",
+    "zod": "^4.0.0"
+  }
 }
