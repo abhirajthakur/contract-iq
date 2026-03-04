@@ -1,0 +1,14 @@
+{
+  "extends": "@contract-iq/typescript-config/base.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "lib": ["esnext"],
+    "sourceMap": true,
+    "jsx": "react-jsx",
+    "verbatimModuleSyntax": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
