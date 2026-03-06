@@ -7,18 +7,14 @@ import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { analyzeContract } from "@/lib/api";
 import { cn } from "@/lib/utils";
+import { useAnalysisStore } from "@/store/analysis-store";
 
 const MAX_FILE_SIZE_MB = 10;
-const VALID_TYPES = [
-  "application/pdf",
-  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-];
 
 function validateFile(file: File): string | null {
-  const isValidType =
-    VALID_TYPES.includes(file.type) ||
-    file.name.toLowerCase().endsWith(".pdf") ||
-    file.name.toLowerCase().endsWith(".docx");
+  const name = file.name.toLowerCase();
+
+  const isValidType = name.endsWith(".pdf") || name.endsWith(".docx");
 
   if (!isValidType) {
     return "Only PDF and DOCX files are allowed.";
@@ -39,6 +35,7 @@ export default function UploadContractForm() {
   const [dragOver, setDragOver] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { setAnalysis } = useAnalysisStore();
 
   const handleFile = (selectedFile: File) => {
     const validationError = validateFile(selectedFile);
@@ -81,7 +78,9 @@ export default function UploadContractForm() {
 
       const result = await analyzeContract(file);
 
-      router.push(`/analysis/${encodeURIComponent(result.documentName)}`);
+      setAnalysis(result);
+
+      router.push("/analysis");
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
@@ -121,8 +120,7 @@ export default function UploadContractForm() {
           ref={inputRef}
           id="file-input"
           type="file"
-          accept=".pdf,.docx,"
-          className="sr-only"
+          accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
           onChange={(e) => {
             const selectedFile = e.target.files?.[0];
             if (selectedFile) {

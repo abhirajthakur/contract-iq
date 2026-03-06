@@ -4,7 +4,7 @@ export async function analyzeContract(file: File): Promise<ContractAnalysis> {
   const formData = new FormData();
   formData.append("file", file);
 
-  const res = await fetch("/api/analyze", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/analyze`, {
     method: "POST",
     body: formData,
   });
