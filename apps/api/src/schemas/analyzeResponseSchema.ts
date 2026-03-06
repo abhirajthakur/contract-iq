@@ -21,5 +21,4 @@ export const contractAnalysisSchema: z.ZodType<ContractAnalysis> = z.object({
   totalClauses: z.number().int(),
   highRiskCount: z.number().int(),
   clauses: z.array(highRiskClauseSchema),
-  createdAt: z.string(),
 });
