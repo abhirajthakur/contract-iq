@@ -2,6 +2,10 @@
 
 AI-powered contract risk analysis. Upload a PDF or DOCX contract and get instant clause-by-clause risk scoring, summaries, and negotiation tips — powered by Google Gemini.
 
+## Demo
+
+https://github.com/user-attachments/assets/9aaebafb-de10-434c-8840-0177ac60ff7d
+
 ## Architecture
 
 Turborepo monorepo with three layers:
